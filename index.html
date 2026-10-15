@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Subwave Studio – Local-First AI Audio Workstation & Silence Remover</title>
+    <meta name="title" content="Subwave Studio – Local-First AI Audio Workstation & Silence Remover" />
+    <meta name="description" content="Local-first browser audio workstation inspired by submind.co. Remove silence, auto-split tracks, convert stereo to mono, record studio voice, and denoise audio 100% in your browser." />
+    <meta name="keywords" content="subwave studio, audio silence remover, audio splitter, automatic audio splitter, stereo to mono converter, browser audio editor, audio format converter, online voice recorder, background noise remover, local first audio editor, github pages audio tool" />
+    <meta name="author" content="Subwave Studio" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#07080b" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Subwave Studio" />
+    <meta property="og:title" content="Subwave Studio – Local-First AI Audio Workstation" />
+    <meta property="og:description" content="100% private, browser-based audio workstation. Remove silence, auto-split, denoise, convert stereo to mono, record, and export with zero server uploads." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&auto=format&fit=crop&q=80" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Subwave Studio – Local-First AI Audio Workstation" />
+    <meta name="twitter:description" content="100% client-side audio workstation. Remove silence, auto-split, denoise, convert stereo to mono, record, and export in your browser." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&auto=format&fit=crop&q=80" />
+
+    <!-- Fonts: Plus Jakarta Sans (Display & Body) + JetBrains Mono (Telemetry & Timecodes) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://subwave.studio/#app",
+          "name": "Subwave Studio",
+          "url": "https://subwave.studio/",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All modern browsers (Chrome, Edge, Safari, Firefox)",
+          "description": "High-performance local-first audio workstation featuring AI silence removal, intelligent automatic track splitting, stereo to mono conversion, noise reduction, and studio voice recording with zero server processing.",
+          "browserRequirements": "Requires Web Audio API and HTML5 Canvas",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "AI silence detector and remover with custom threshold and padding",
+            "Automatic smart track splitter by silence, fixed duration, or manual cue markers",
+            "Stereo to Mono conversion (L+R mix, Left only, Right only)",
+            "Browser-based high-fidelity microphone recorder with real-time VU meter",
+            "Background noise remover with spectral noise gate, 50/60Hz de-hummer, and low/high pass filtering",
+            "Waveform interactive editor with cut, copy, paste, trim, normalize, gain boost, fade in/out",
+            "Audio format converter supporting WAV, MP3, OGG, WebM, FLAC, M4A",
+            "Batch split track exporter with single-click ZIP archive download",
+            "100% Client-side privacy - no data or audio ever sent to a remote server"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://subwave.studio/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does the local-first silence remover work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Subwave Studio decodes audio into Float32 PCM sample arrays directly in your browser using the Web Audio API. It performs sliding window root-mean-square (RMS) energy analysis against your chosen decibel (dB) threshold and minimum silence duration to instantly isolate speech from dead air."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my audio uploaded to any server or cloud?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Subwave Studio runs 100% client-side inside your browser sandbox. Your audio files never leave your computer or phone, guaranteeing complete privacy and zero data leakage. It can even be deployed statically to GitHub Pages and run offline."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I split a long podcast or lecture and download all parts at once?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! The automatic splitter allows splitting by silence, equal time slices (e.g., 5-minute chunks), or custom marker points. You can preview every segment and download them all bundled together in a ZIP file or as individual high-definition WAV files."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the noise removal feature clean up background hums and hiss?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The noise filter applies a combination of adjustable spectral noise gates, gentle high-pass/low-pass Butterworth biquad filters, and specialized 50Hz/60Hz notch harmonic filters to eliminate electrical grounding hum, HVAC rumble, and mic hiss."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-[#07080b] text-slate-100 antialiased selection:bg-cyan-500 selection:text-white min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

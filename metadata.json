@@ -1,0 +1,10 @@
+{
+  "name": "AudioFlow Studio - Browser AI Audio Editor & Silence Remover",
+  "description": "Free 100% client-side audio workstation. Silence remover, smart splitter, stereo-to-mono converter, format converter, studio voice recorder, and AI background noise remover. Zero cloud uploads, works offline.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
