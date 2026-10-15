@@ -435,8 +435,8 @@ export const AudioRecorderModal: React.FC<AudioRecorderModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-2xl p-4 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/[0.04] transition"
@@ -445,22 +445,22 @@ export const AudioRecorderModal: React.FC<AudioRecorderModalProps> = ({
         </button>
 
         {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2.5 rounded-xl bg-rose-500/15 text-rose-400 border border-rose-500/30">
-            <Radio className="w-5 h-5" />
+        <div className="flex items-center gap-3 mb-5 sm:mb-6 pr-8">
+          <div className="p-2 sm:p-2.5 rounded-xl bg-rose-500/15 text-rose-400 border border-rose-500/30 shrink-0">
+            <Radio className="w-4 sm:w-5 h-4 sm:h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-[var(--text-primary)]">Broadcast Recording Studio</h3>
-            <p className="text-xs text-[var(--text-secondary)]">
+            <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)]">Broadcast Recording Studio</h3>
+            <p className="text-[11px] sm:text-xs text-[var(--text-secondary)]">
               Calibrated in-browser capture with real-time FFT spectrum, input gain staging, and pre-roll countdown.
             </p>
           </div>
         </div>
 
         {/* Studio Presets Bar */}
-        <div className="flex items-center gap-2 mb-5">
-          <span className="text-xs text-[var(--text-muted)] font-medium">Studio Preset:</span>
-          <div className="flex gap-1.5 p-1 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-5">
+          <span className="text-xs text-[var(--text-muted)] font-medium shrink-0">Studio Preset:</span>
+          <div className="flex flex-wrap gap-1.5 p-1 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)] w-full sm:w-auto">
             {[
               { id: 'podcast', label: 'Podcast Voice', desc: 'Noise-suppressed speech' },
               { id: 'broadcast', label: 'Broadcast Studio', desc: 'Raw uncompressed mic' },
@@ -470,7 +470,7 @@ export const AudioRecorderModal: React.FC<AudioRecorderModalProps> = ({
                 key={p.id}
                 disabled={isRecording}
                 onClick={() => handleSelectPreset(p.id as any)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                className={`flex-1 sm:flex-none px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition text-center ${
                   preset === p.id
                     ? 'bg-white text-slate-900 shadow-sm font-semibold'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--btn-hover-bg)]'

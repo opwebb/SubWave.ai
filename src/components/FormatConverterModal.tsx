@@ -116,7 +116,7 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
         {/* 1. Format Family Selector */}
         <div className="mb-5">
           <label className="text-xs font-semibold text-[var(--text-primary)] block mb-1.5">Target Format Extension</label>
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
             <button
               onClick={() => setFormat('wav')}
               className={`p-3 rounded-xl border text-left transition active:scale-[0.99] ${
@@ -170,7 +170,7 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
             <label className="text-xs font-semibold text-[var(--text-primary)] block mb-2">
               Lossless Bit Depth Resolution
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {[
                 { id: 16, label: '16-bit PCM', desc: 'CD Standard (1411 kbps)' },
                 { id: 24, label: '24-bit PCM', desc: 'Studio Master (2116 kbps)' },
@@ -198,7 +198,7 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
             <label className="text-xs font-semibold text-[var(--text-primary)] block mb-2">
               MP3 Audio Encoding Bitrate
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {[
                 { id: 128, label: '128 kbps', desc: 'Compact Voice / Fast DL' },
                 { id: 192, label: '192 kbps', desc: 'Standard Hi-Fi Speech' },
@@ -236,7 +236,7 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
         {/* 3. Channel Routing */}
         <div className="mb-5">
           <label className="text-xs font-semibold text-[var(--text-primary)] block mb-1.5">Channel Configuration</label>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
               { id: 'keep', label: `Keep Original (${originalChannels}ch)` },
               { id: 'mono', label: 'Force Mono (1ch)' },
@@ -258,9 +258,9 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
         </div>
 
         {/* 4. Estimated Output Specs Summary */}
-        <div className="p-3.5 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)] flex items-center justify-between text-xs font-mono tabular-nums text-[var(--text-secondary)] mb-6">
+        <div className="p-3.5 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono tabular-nums text-[var(--text-secondary)] mb-6">
           <div className="flex items-center gap-2">
-            <HardDrive className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+            <HardDrive className="w-4 h-4 text-cyan-500 dark:text-cyan-400 shrink-0" />
             <span>Estimated Size: <strong className="text-[var(--text-primary)] font-bold font-mono">~{estimatedMb} MB</strong></span>
           </div>
           <div className="text-[11px] text-[var(--text-muted)]">
@@ -269,18 +269,18 @@ export const FormatConverterModal: React.FC<FormatConverterModalProps> = ({
         </div>
 
         {/* 5. Action Buttons */}
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3">
           <button
             onClick={onClose}
             disabled={isExporting}
-            className="px-4 py-2.5 rounded-xl bg-[var(--card-secondary)] hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-medium border border-[var(--border-subtle)] transition active:scale-95 disabled:opacity-40"
+            className="px-4 py-2.5 rounded-xl bg-[var(--card-secondary)] hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-xs font-medium border border-[var(--border-subtle)] transition active:scale-95 disabled:opacity-40 text-center"
           >
             Cancel
           </button>
           <button
             onClick={handleExport}
             disabled={isExporting}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[var(--text-primary)] text-[var(--bg-canvas)] hover:opacity-90 active:scale-95 font-semibold text-xs shadow-md transition disabled:opacity-50"
+            className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[var(--text-primary)] text-[var(--bg-canvas)] hover:opacity-90 active:scale-95 font-semibold text-xs shadow-md transition disabled:opacity-50"
           >
             {isExporting ? (
               <>

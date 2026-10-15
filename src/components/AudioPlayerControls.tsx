@@ -95,63 +95,65 @@ export const AudioPlayerControls: React.FC<AudioPlayerControlsProps> = ({
       </div>
 
       {/* Group 2: Main Transport Controls */}
-      <div className="flex items-center gap-2 sm:gap-2.5">
-        <button
-          onClick={() => onSkipBack(5)}
-          className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
-          title="Rewind 5s (←)"
-          aria-label="Rewind 5 seconds"
-        >
-          <Rewind className="w-4 h-4" />
-        </button>
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <button
+            onClick={() => onSkipBack(5)}
+            className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
+            title="Rewind 5s (←)"
+            aria-label="Rewind 5 seconds"
+          >
+            <Rewind className="w-4 h-4" />
+          </button>
 
-        <button
-          onClick={onStop}
-          className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
-          title="Stop & Reset to Start"
-          aria-label="Stop audio"
-        >
-          <RotateCcw className="w-4 h-4" />
-        </button>
+          <button
+            onClick={onStop}
+            className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
+            title="Stop & Reset to Start"
+            aria-label="Stop audio"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
 
-        {/* Main Play / Pause Button */}
-        <button
-          onClick={onTogglePlay}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-[var(--text-primary)] text-[var(--bg-canvas)] shadow-md hover:opacity-90 active:scale-95 transition"
-          title="Play / Pause (Spacebar)"
-          aria-label={isPlaying ? 'Pause' : 'Play'}
-        >
-          {isPlaying ? (
-            <Pause className="w-5 h-5 fill-current" />
-          ) : (
-            <Play className="w-5 h-5 fill-current translate-x-0.5" />
-          )}
-        </button>
+          {/* Main Play / Pause Button */}
+          <button
+            onClick={onTogglePlay}
+            className="flex items-center justify-center w-11 h-11 rounded-full bg-[var(--text-primary)] text-[var(--bg-canvas)] shadow-md hover:opacity-90 active:scale-95 transition"
+            title="Play / Pause (Spacebar)"
+            aria-label={isPlaying ? 'Pause' : 'Play'}
+          >
+            {isPlaying ? (
+              <Pause className="w-5 h-5 fill-current" />
+            ) : (
+              <Play className="w-5 h-5 fill-current translate-x-0.5" />
+            )}
+          </button>
 
-        <button
-          onClick={() => onSkipForward(5)}
-          className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
-          title="Fast Forward 5s (→)"
-          aria-label="Fast forward 5 seconds"
-        >
-          <FastForward className="w-4 h-4" />
-        </button>
+          <button
+            onClick={() => onSkipForward(5)}
+            className="p-2 sm:p-2.5 rounded-lg hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition active:scale-95"
+            title="Fast Forward 5s (→)"
+            aria-label="Fast forward 5 seconds"
+          >
+            <FastForward className="w-4 h-4" />
+          </button>
 
-        <button
-          onClick={onToggleLoop}
-          className={`p-2 sm:p-2.5 rounded-lg transition active:scale-95 ${
-            isLooping 
-              ? 'bg-cyan-500/15 text-cyan-500 dark:text-cyan-400 border border-cyan-500/40' 
-              : 'hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-          }`}
-          title={isLooping ? 'Looping Enabled' : 'Enable Loop'}
-          aria-label="Toggle loop"
-        >
-          <Repeat className="w-4 h-4" />
-        </button>
+          <button
+            onClick={onToggleLoop}
+            className={`p-2 sm:p-2.5 rounded-lg transition active:scale-95 ${
+              isLooping 
+                ? 'bg-cyan-500/15 text-cyan-500 dark:text-cyan-400 border border-cyan-500/40' 
+                : 'hover:bg-[var(--btn-hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+            title={isLooping ? 'Looping Enabled' : 'Enable Loop'}
+            aria-label="Toggle loop"
+          >
+            <Repeat className="w-4 h-4" />
+          </button>
+        </div>
 
         {/* Timecode Readout */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--card-secondary)] border border-[var(--border-subtle)] font-mono tabular-nums text-xs ml-1 select-none">
+        <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[var(--card-secondary)] border border-[var(--border-subtle)] font-mono tabular-nums text-xs select-none">
           <span className="text-[var(--text-primary)] font-semibold">{formatTime(currentTime)}</span>
           <span className="text-[var(--text-muted)]">/</span>
           <span className="text-[var(--text-secondary)]">{formatTime(duration)}</span>

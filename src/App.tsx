@@ -790,35 +790,35 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 space-y-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-6 sm:space-y-10 overflow-x-hidden">
         {/* Marquee Hero Section */}
-        <section className="text-center max-w-3xl mx-auto pt-4 pb-2">
-          <span className="text-xs font-semibold tracking-wider text-cyan-400 uppercase mb-3 block">
+        <section className="text-center max-w-3xl mx-auto pt-2 sm:pt-4 pb-2">
+          <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-cyan-400 uppercase mb-2 sm:mb-3 block">
             Local-First Audio Engine
           </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight mb-4">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight mb-3 sm:mb-4">
             The private in-browser audio workstation.
           </h1>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto mb-6">
+          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto mb-4 sm:mb-6">
             Intelligent silence removal, multi-mode splitting, stereo-to-mono routing, and background noise reduction. No cloud processing, no tracking, works completely offline.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-[var(--text-muted)] font-medium">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-[var(--text-muted)] font-medium">
             <span>100% Client-Side DSP</span>
             <span aria-hidden="true" className="text-slate-600 dark:text-slate-700">·</span>
             <span>Zero Server Uploads</span>
             <span aria-hidden="true" className="text-slate-600 dark:text-slate-700">·</span>
-            <span>Zero Setup · Works Completely Offline</span>
+            <span>Zero Setup · Works Offline</span>
           </div>
         </section>
 
         {/* Central Workstation Viewport Card */}
-        <div id="workstation" className="space-y-4">
+        <div id="workstation" className="space-y-3 sm:space-y-4">
           {/* Track Metadata Ribbon (Zero-Pill Discipline) */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)]">
+          <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 bg-[var(--card-secondary)] rounded-xl border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)]">
             <div className="flex items-center gap-2">
               <FileAudio className="w-4 h-4 text-cyan-400 shrink-0" />
-              <span className="font-semibold text-[var(--text-primary)] truncate max-w-[200px] sm:max-w-none">{fileName}</span>
+              <span className="font-semibold text-[var(--text-primary)] truncate max-w-[160px] sm:max-w-none">{fileName}</span>
               {audioBuffer && (
                 <span className="font-mono tabular-nums text-[var(--text-muted)] hidden sm:inline">
                   · {formatTime(audioBuffer.duration)} · {audioBuffer.sampleRate} Hz · {audioBuffer.numberOfChannels === 1 ? 'Mono' : 'Stereo'}
@@ -874,26 +874,29 @@ export default function App() {
         </div>
 
         {/* Studio Tool Console (Upgraded from the basic 1-line tab strip) */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2.5">
             <div className="flex items-center gap-2">
               <Sliders className="w-4 h-4 text-cyan-400" />
-              <h2 className="text-sm font-bold text-[var(--text-primary)]">Studio Processing Console</h2>
+              <h2 className="text-xs sm:text-sm font-bold text-[var(--text-primary)]">Studio Processing Console</h2>
             </div>
-            <div className="text-xs text-[var(--text-muted)] font-mono tabular-nums">
+            <div className="text-[11px] sm:text-xs text-[var(--text-muted)] font-mono tabular-nums">
               Session: {audioBuffer?.sampleRate || 44100}Hz · 32-bit Float Core
             </div>
           </div>
 
           {/* Tactile Tool Module Rack */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {consoleModules.map(mod => {
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+            {consoleModules.map((mod, idx) => {
               const isActive = activeTab === mod.id;
+              const isLastOdd = idx === consoleModules.length - 1;
               return (
                 <button
                   key={mod.id}
                   onClick={() => setActiveTab(mod.id)}
-                  className={`p-3.5 rounded-xl border text-left transition relative overflow-hidden group ${
+                  className={`p-3 sm:p-3.5 rounded-xl border text-left transition relative overflow-hidden group ${
+                    isLastOdd ? 'col-span-2 sm:col-span-1' : ''
+                  } ${
                     isActive
                       ? 'bg-[var(--card-bg)] border-cyan-400/60 shadow-lg shadow-cyan-500/5'
                       : 'bg-[var(--card-secondary)] hover:bg-[var(--card-bg)] border-[var(--border-subtle)] hover:border-[var(--border-highlight)]'
@@ -904,20 +907,20 @@ export default function App() {
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500" />
                   )}
 
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                     <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-muted)]">
                       {mod.category}
                     </span>
-                    <span className="p-1.5 rounded-lg bg-[var(--btn-hover-bg)] border border-[var(--border-subtle)]">
+                    <span className="p-1 sm:p-1.5 rounded-lg bg-[var(--btn-hover-bg)] border border-[var(--border-subtle)]">
                       {mod.icon}
                     </span>
                   </div>
 
-                  <div className="text-xs font-bold text-[var(--text-primary)] mb-1">
+                  <div className="text-xs font-bold text-[var(--text-primary)] mb-0.5 sm:mb-1">
                     {mod.label}
                   </div>
 
-                  <div className={`text-[11px] font-mono tabular-nums ${
+                  <div className={`text-[10px] sm:text-[11px] font-mono tabular-nums ${
                     mod.statusHighlight ? 'text-cyan-400 font-medium' : 'text-[var(--text-muted)]'
                   }`}>
                     {mod.status}

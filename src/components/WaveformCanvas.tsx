@@ -433,10 +433,56 @@ export const WaveformCanvas: React.FC<WaveformCanvasProps> = ({
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!audioBuffer) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const clickedTime = pixelToTime(x, rect.width);
+
+    setIsDraggingSelection(true);
+    setDragAnchor(clickedTime);
+    onSelectRange({ start: clickedTime, end: clickedTime });
+    onSeek(clickedTime);
+    setHoverTime(clickedTime);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !audioBuffer) return;
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const time = pixelToTime(x, rect.width);
+    setHoverTime(time);
+
+    if (isDraggingSelection && dragAnchor !== null) {
+      const start = Math.min(dragAnchor, time);
+      const end = Math.max(dragAnchor, time);
+      if (end - start > 0.05) {
+        onSelectRange({ start, end });
+      } else {
+        onSelectRange(null);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDraggingSelection(false);
+    setDragAnchor(null);
+    setHoverTime(null);
+  };
+
   return (
     <div className="relative bg-[var(--card-bg)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl transition-colors">
       {/* Top Waveform Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[var(--card-secondary)] border-b border-[var(--border-subtle)] text-xs text-[var(--text-secondary)]">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-[var(--card-secondary)] border-b border-[var(--border-subtle)] text-xs text-[var(--text-secondary)]">
         <div className="flex items-center gap-2 text-xs">
           <span className="text-[var(--text-primary)] font-medium">Interactive Canvas</span>
           <span aria-hidden="true" className="text-slate-400">·</span>
@@ -507,7 +553,7 @@ export const WaveformCanvas: React.FC<WaveformCanvasProps> = ({
       </div>
 
       {/* Canvas Viewport */}
-      <div ref={containerRef} className="relative w-full h-44 sm:h-56 select-none">
+      <div ref={containerRef} className="relative w-full h-40 sm:h-56 select-none touch-none">
         <canvas
           ref={canvasRef}
           onMouseDown={handleMouseDown}
@@ -518,7 +564,11 @@ export const WaveformCanvas: React.FC<WaveformCanvasProps> = ({
             setHoverTime(null);
           }}
           onDoubleClick={handleDoubleClick}
-          className="w-full h-full cursor-crosshair block"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchEnd}
+          className="w-full h-full cursor-crosshair block touch-none"
         />
 
         {hoverTime !== null && (
